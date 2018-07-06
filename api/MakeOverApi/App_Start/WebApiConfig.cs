@@ -27,6 +27,13 @@ namespace MakeOverApi
                 defaults: new { controller = "HotelDeals" }
             );
 
+            //this is for hotdeals
+            config.Routes.MapHttpRoute(
+                name: "Suggestions",
+                routeTemplate: "api/suggest/",
+                defaults: new { controller = "Suggest" }
+            );
+
         }
     }
 }
