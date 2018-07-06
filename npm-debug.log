@@ -1,0 +1,106 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node@6/6.14.2/bin/node',
+1 verbose cli   '/usr/local/opt/node@6/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '0.53.3' ]
+2 info using npm@3.10.10
+3 info using node@v6.14.2
+4 verbose config Skipping project config: /Users/munnasingh/.npmrc. (matches userconfig)
+5 silly loadCurrentTree Starting
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 silly fetchPackageMetaData 0.53.3
+9 silly fetchNamedPackageData 0.53.3
+10 silly mapToRegistry name 0.53.3
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry data Result {
+13 silly mapToRegistry   raw: '0.53.3',
+13 silly mapToRegistry   scope: null,
+13 silly mapToRegistry   escapedName: '0.53.3',
+13 silly mapToRegistry   name: '0.53.3',
+13 silly mapToRegistry   rawSpec: '',
+13 silly mapToRegistry   spec: 'latest',
+13 silly mapToRegistry   type: 'tag' }
+14 silly mapToRegistry uri https://registry.npmjs.org/0.53.3
+15 verbose request uri https://registry.npmjs.org/0.53.3
+16 verbose request no auth needed
+17 info attempt registry request try #1 at 4:56:49 PM
+18 verbose request id 4790593181880295
+19 http request GET https://registry.npmjs.org/0.53.3
+20 http 404 https://registry.npmjs.org/0.53.3
+21 verbose headers { date: 'Thu, 05 Jul 2018 11:26:52 GMT',
+21 verbose headers   'content-type': 'application/json',
+21 verbose headers   'content-length': '21',
+21 verbose headers   connection: 'keep-alive',
+21 verbose headers   'set-cookie': [ '__cfduid=d78b52ec5fc9e34c0e73cfe5cea4dc8751530790011; expires=Fri, 05-Jul-19 11:26:51 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+21 verbose headers   'cache-control': 'max-age=300',
+21 verbose headers   'cf-cache-status': 'MISS',
+21 verbose headers   'cf-ray': '43597aa22b718a5b-BOM',
+21 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+21 verbose headers   vary: 'accept-encoding, accept',
+21 verbose headers   server: 'cloudflare' }
+22 silly get cb [ 404,
+22 silly get   { date: 'Thu, 05 Jul 2018 11:26:52 GMT',
+22 silly get     'content-type': 'application/json',
+22 silly get     'content-length': '21',
+22 silly get     connection: 'keep-alive',
+22 silly get     'set-cookie': [ '__cfduid=d78b52ec5fc9e34c0e73cfe5cea4dc8751530790011; expires=Fri, 05-Jul-19 11:26:51 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+22 silly get     'cache-control': 'max-age=300',
+22 silly get     'cf-cache-status': 'MISS',
+22 silly get     'cf-ray': '43597aa22b718a5b-BOM',
+22 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+22 silly get     vary: 'accept-encoding, accept',
+22 silly get     server: 'cloudflare' } ]
+23 silly fetchPackageMetaData Error: Not found : 0.53.3
+23 silly fetchPackageMetaData     at makeError (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+23 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+23 silly fetchPackageMetaData     at Request._callback (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+23 silly fetchPackageMetaData     at Request.self.callback (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:187:22)
+23 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+23 silly fetchPackageMetaData     at Request.emit (events.js:191:7)
+23 silly fetchPackageMetaData     at Request.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+23 silly fetchPackageMetaData     at emitOne (events.js:96:13)
+23 silly fetchPackageMetaData     at Request.emit (events.js:188:7)
+23 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:969:12)
+23 silly fetchPackageMetaData  error for 0.53.3 { Error: Not found : 0.53.3
+23 silly fetchPackageMetaData     at makeError (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+23 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+23 silly fetchPackageMetaData     at Request._callback (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+23 silly fetchPackageMetaData     at Request.self.callback (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:187:22)
+23 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+23 silly fetchPackageMetaData     at Request.emit (events.js:191:7)
+23 silly fetchPackageMetaData     at Request.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+23 silly fetchPackageMetaData     at emitOne (events.js:96:13)
+23 silly fetchPackageMetaData     at Request.emit (events.js:188:7)
+23 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:969:12) pkgid: '0.53.3', statusCode: 404, code: 'E404' }
+24 silly rollbackFailedOptional Starting
+25 silly rollbackFailedOptional Finishing
+26 silly runTopLevelLifecycles Finishing
+27 silly install printInstalled
+28 verbose stack Error: Not found : 0.53.3
+28 verbose stack     at makeError (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+28 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+28 verbose stack     at Request._callback (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+28 verbose stack     at Request.self.callback (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:187:22)
+28 verbose stack     at emitTwo (events.js:106:13)
+28 verbose stack     at Request.emit (events.js:191:7)
+28 verbose stack     at Request.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+28 verbose stack     at emitOne (events.js:96:13)
+28 verbose stack     at Request.emit (events.js:188:7)
+28 verbose stack     at IncomingMessage.<anonymous> (/usr/local/Cellar/node@6/6.14.2/lib/node_modules/npm/node_modules/request/request.js:969:12)
+29 verbose statusCode 404
+30 verbose pkgid 0.53.3
+31 verbose cwd /Users/munnasingh/projects/face
+32 error Darwin 17.6.0
+33 error argv "/usr/local/Cellar/node@6/6.14.2/bin/node" "/usr/local/opt/node@6/bin/npm" "install" "0.53.3"
+34 error node v6.14.2
+35 error npm  v3.10.10
+36 error code E404
+37 error 404 Not found : 0.53.3
+38 error 404
+39 error 404 '0.53.3' is not in the npm registry.
+40 error 404 You should bug the author to publish it (or use the name yourself!)
+41 error 404 Note that you can also install from a
+42 error 404 tarball, folder, http url, or git url.
+43 verbose exit [ 1, true ]
