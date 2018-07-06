@@ -18,9 +18,9 @@ namespace MakeOverApi.Controllers.HotDeals
             return new ResponseDto()
             {
                 faceId = faceDto.FirstOrDefault().faceId,
-                prodlist = new List<Prodlist>()
+                prodlist = new List<ProductCatalogue>()
                 {
-                    new Prodlist()
+                    new ProductCatalogue()
                     {
                         imageUrl = "https://images-eu.ssl-images-amazon.com/images/I/71oh4nqgS0L._AC_SY230_.jpg",
                         title= "Magic Attitude Fisherman Denim Cap",
@@ -28,7 +28,7 @@ namespace MakeOverApi.Controllers.HotDeals
                         actualprice="Rs.599",
                         offerPrice="Rs.299"
                     },
-                    new Prodlist()
+                    new ProductCatalogue()
                     {
                         imageUrl = "https://images-eu.ssl-images-amazon.com/images/I/81Wlvm5weoL._AC_SY230_.jpg",
                         title= "KIDANIA Kids Cotton Fancy Hat/Cap for Girls",
@@ -36,7 +36,7 @@ namespace MakeOverApi.Controllers.HotDeals
                         actualprice="Rs.499",
                         offerPrice="Rs.199"
                     },
-                      new Prodlist()
+                      new ProductCatalogue()
                     {
                         imageUrl = "https://images-eu.ssl-images-amazon.com/images/I/81aTY-m4PKL._AC_SY230_.jpg",
                         title= "Zacharias Girl's Visor Tennis Cap",
