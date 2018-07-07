@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using MakeOverApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,11 +28,6 @@ namespace MakeOverApi.Business
                 var htmlDoc = web.Load("https://amzn.to/2tYHjT8 ");
                 var orderedListRoot = htmlDoc.DocumentNode.Descendants("body").SelectMany(y => y.Descendants("ol").Where(item => item.Attributes["role"].Value == "list")).ToList();
                 var listItems = orderedListRoot.First().Descendants("li").ToList();
-
-
-                //HtmlDocument
-
-                //id="widgetContent"
             }
             catch (Exception ex)
             {
@@ -117,7 +113,32 @@ namespace MakeOverApi.Business
                 return null;
             }
 
+            productList = productList.Take(5).ToList();
+            for (int i = 0; i < 4; i++)
+            {
+                productList[i].rating = (i + 1).ToString();
+            }            
+
             return productList;
+        }
+
+        private void SaveResults(List<ProductCatalogue> results)
+        {
+            var jsonStr = JsonConvert.SerializeObject(results);
+            //write string to file
+            System.IO.File.WriteAllText(@"OldResults.txt", jsonStr);
+        }
+
+        private List<ProductCatalogue> ReadData()
+        {
+            List<ProductCatalogue> resultItems = new List<ProductCatalogue>();
+            using (StreamReader r = new StreamReader("OldResults.txt"))
+            {
+                string json = r.ReadToEnd();
+                resultItems = JsonConvert.DeserializeObject<List<ProductCatalogue>>(json);
+            }
+
+            return resultItems;
         }
 
         public List<ProductCatalogue> GetBestSellers(string shortUrl)
@@ -125,13 +146,37 @@ namespace MakeOverApi.Business
             List<HtmlNode> result = new List<HtmlNode>();
             ProductCatalogue product = new ProductCatalogue();
             List<ProductCatalogue> productList = new List<ProductCatalogue>();
-
+            int tryCount = 0;
             try
             {
-                HtmlWeb web = new HtmlWeb();
-                var htmlDoc = web.Load(shortUrl);
-                var orderedListRoot = htmlDoc.DocumentNode.Descendants("body").SelectMany(y => y.Descendants("ol")).ToList();
-                if (orderedListRoot.Count == 0) return productList;
+                List<HtmlNode> orderedListRoot = new List<HtmlNode>();
+                HtmlWeb web;
+
+                do
+                {
+                    if (tryCount >= 1)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                    }
+
+                    web = new HtmlWeb();
+                    var htmlDoc = web.Load(shortUrl);
+                    orderedListRoot = htmlDoc.DocumentNode.Descendants("body").SelectMany(y => y.Descendants("ol")).ToList();
+                    tryCount += 1;
+                   
+                } while (orderedListRoot.Count == 0 && tryCount <= 3);
+
+                if (orderedListRoot.Count == 0)
+                {
+                    try
+                    {
+                        return null; // ReadData();
+                    }
+                    catch (Exception)
+                    {
+                        //ignore
+                    }
+                }
 
                 var listItems = orderedListRoot.First().Descendants("li").Where(item => item.Attributes["class"] != null && item.Attributes["class"].Value == "a-carousel-card acswidget-carousel__card").ToList();
 
@@ -147,7 +192,10 @@ namespace MakeOverApi.Business
                     var prodPriceDiv = listItem.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "a-box-group a-size-small a-spacing-none acs_product-price").ToList();
                     var prodOriginalPriceSpanTag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-mini a-color-secondary acs_product-price__list a-text-strike")).ToList();
 
-                    var prodStarRatingSpanTag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-mini a-color-secondary acs_product-price__list a-text-strike")).ToList();
+                    //var prodStarRatingSpanTag = listItem.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "a-section a-spacing-micro").ToList();
+                    //var startsRating = prodStarRatingSpanTag.SelectMany(span => span.Descendants("i")).ToList();
+
+                    //var prodStarRatingSpanTag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-mini a-color-secondary acs_product-price__list a-text-strike")).ToList();
 
                     //var prodOfferPrice = listItem.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "a-size-base a-color-price acs_product-price__buying").ToList();
                     var prodOfferPriceSpantag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-base a-color-price acs_product-price__buying")).ToList();
@@ -174,15 +222,24 @@ namespace MakeOverApi.Business
 
                     productList.Add(product);
                 }
-
-
-                //HtmlDocument
-
-                //id="widgetContent"
             }
             catch (Exception ex)
             {
-                throw;
+                throw ;
+            }
+            productList = productList.Take(5).ToList();
+            for (int i = 0; i < 4; i++)
+            {
+                productList[i].rating = (i + 1).ToString();
+            }
+
+            try
+            {
+                SaveResults(productList);
+            }
+            catch (Exception)
+            {
+                //ignore
             }
 
             return productList;
