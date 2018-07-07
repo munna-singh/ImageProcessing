@@ -75,10 +75,14 @@ namespace MakeOverApi.Controllers.HotDeals
 
                 //return dynamic response here
                 HtmlParser parser = new HtmlParser();
+                var suggestionList = parser.GetBestSellers(firstMatch.ShortUrl);
+
+                //TODO: if suggestionList is empty then return default prodlist that is working - WATCH for men, or ReadingGlass for women
+                
                 return new ResponseDto()
                 {
                     faceId = faceInfo.faceId,
-                    prodlist = parser.GetBestSellers(firstMatch.ShortUrl)
+                    prodlist = suggestionList
                 };
                              
             }         

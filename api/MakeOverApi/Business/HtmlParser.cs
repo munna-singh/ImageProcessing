@@ -27,11 +27,6 @@ namespace MakeOverApi.Business
                 var htmlDoc = web.Load("https://amzn.to/2tYHjT8 ");
                 var orderedListRoot = htmlDoc.DocumentNode.Descendants("body").SelectMany(y => y.Descendants("ol").Where(item => item.Attributes["role"].Value == "list")).ToList();
                 var listItems = orderedListRoot.First().Descendants("li").ToList();
-
-
-                //HtmlDocument
-
-                //id="widgetContent"
             }
             catch (Exception ex)
             {
@@ -174,11 +169,6 @@ namespace MakeOverApi.Business
 
                     productList.Add(product);
                 }
-
-
-                //HtmlDocument
-
-                //id="widgetContent"
             }
             catch (Exception ex)
             {
