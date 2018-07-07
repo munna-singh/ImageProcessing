@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MakeOverApi.Models
 {
-    public class Prodlist
+    public class ProductCatalogue
     {
         public string imageUrl { get; set; }
         public string title { get; set; }
@@ -17,6 +17,6 @@ namespace MakeOverApi.Models
     public class ResponseDto
     {
         public string faceId { get; set; }
-        public List<Prodlist> prodlist { get; set; }
+        public List<ProductCatalogue> prodlist { get; set; }
     }
 }

@@ -22,9 +22,9 @@ namespace MakeOverApi.Models
 
     public class FacialHair
     {
-        public int moustache { get; set; }
-        public int beard { get; set; }
-        public int sideburns { get; set; }
+        public double moustache { get; set; }
+        public double beard { get; set; }
+        public double sideburns { get; set; }
     }
 
     public class FaceAttributes
