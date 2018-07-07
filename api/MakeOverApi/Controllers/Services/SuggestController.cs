@@ -33,7 +33,7 @@ namespace MakeOverApi.Controllers.HotDeals
             else if (glass.StartsWith("Sun")) glassType = CategoryCode.SunGlass;
 
           //beard??
-          var hasBeard = gender>0 &&  faceInfo.faceAttributes.facialHair.beard > 0.4;
+          var hasBeard = gender>0 &&  faceInfo.faceAttributes.facialHair.beard >= 0.4;
 
             //read all data from GenderData Table
             using (var context = new makeoverEntities())
