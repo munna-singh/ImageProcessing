@@ -23,8 +23,8 @@ namespace MakeOverApi
             //this is for hotdeals
             config.Routes.MapHttpRoute(
                 name: "HotDealsGeneral",
-                routeTemplate: "api/HotelDeals/",
-                defaults: new { controller = "HotelDeals" }
+                routeTemplate: "api/HotDeals/",
+                defaults: new { controller = "HotDeals" }
             );
 
             //this is for hotdeals

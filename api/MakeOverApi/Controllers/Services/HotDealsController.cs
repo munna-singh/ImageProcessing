@@ -13,19 +13,13 @@ namespace MakeOverApi.Controllers.HotDeals
     {
         public ResponseDto Get()
         {
-            try
+            HtmlParser parser = new HtmlParser();
+            return new ResponseDto()
             {
-                HtmlParser parser = new HtmlParser();
-                return new ResponseDto()
-                {
-                    faceId = "6aeef070-aeb0-40f2-8cf2-6cf3ec415e76",
-                    prodlist = parser.GetHotDeals()
-                };
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }          
+                faceId = "DUMMY-ID-FOR-HOT-DEALS", // no faceid for hot deals
+                prodlist = parser.GetHotDeals()
+            };
+
         }
     }
 }

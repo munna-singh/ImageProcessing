@@ -120,7 +120,74 @@ namespace MakeOverApi.Business
             return productList;
         }
 
+        public List<ProductCatalogue> GetBestSellers(string shortUrl)
+        {
+            List<HtmlNode> result = new List<HtmlNode>();
+            ProductCatalogue product = new ProductCatalogue();
+            List<ProductCatalogue> productList = new List<ProductCatalogue>();
+
+            try
+            {
+                HtmlWeb web = new HtmlWeb();
+                var htmlDoc = web.Load(shortUrl);
+                var orderedListRoot = htmlDoc.DocumentNode.Descendants("body").SelectMany(y => y.Descendants("ol")).ToList();
+                if (orderedListRoot.Count == 0) return productList;
+
+                var listItems = orderedListRoot.First().Descendants("li").Where(item => item.Attributes["class"] != null && item.Attributes["class"].Value == "a-carousel-card acswidget-carousel__card").ToList();
+
+                foreach (var listItem in listItems)
+                {
+                    var imgTag = listItem.Descendants("img").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "aok-align-center").ToList();
+                    //var imgTag = imageDivs.SelectMany(item => item.Descendants("img").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "product-image")).ToList().SingleOrDefault();
+
+                    var prodTitle = listItem.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "a-box-group a-spacing-top-micro acs_product-title").ToList();
+                    // var dealPrice = priceDivsList.SelectMany(item => item.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "dealPrice")).ToList();
+                    var prodTitleSpantag = prodTitle.SelectMany(span => span.Descendants("span"));
+
+                    var prodPriceDiv = listItem.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "a-box-group a-size-small a-spacing-none acs_product-price").ToList();
+                    var prodOriginalPriceSpanTag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-mini a-color-secondary acs_product-price__list a-text-strike")).ToList();
+
+                    var prodStarRatingSpanTag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-mini a-color-secondary acs_product-price__list a-text-strike")).ToList();
+
+                    //var prodOfferPrice = listItem.Descendants("div").Where(div => div.Attributes["class"] != null && div.Attributes["class"].Value == "a-size-base a-color-price acs_product-price__buying").ToList();
+                    var prodOfferPriceSpantag = prodPriceDiv.SelectMany(span => span.Descendants("span").Where(price => price.Attributes["class"] != null && price.Attributes["class"].Value == "a-size-base a-color-price acs_product-price__buying")).ToList();
+
+                    //if (originalPriceTags.Count() == 0)
+                    //{
+                    //    var dealPriceRangeTag = dealPrice.SelectMany(span => span.Descendants("span").Where(attr => attr.Attributes["class"] != null && attr.Attributes["class"].Value == "aok-hide-text")).SingleOrDefault();
+
+                    //}
+
+                    product = new ProductCatalogue();
+                    product.title = prodTitleSpantag.FirstOrDefault().InnerText;
+                    product.imageUrl = imgTag.FirstOrDefault().Attributes["src"].Value;
+                    if (prodOriginalPriceSpanTag.Count() > 0)
+                    {
+                        //"&#x20B9;" this is html code for INR (Indian Rupee), no font available, so removing for now.
+                        product.actualprice = prodOriginalPriceSpanTag.First().InnerText.Replace("&#x20B9;","").Replace("&nbsp;", "").Trim();
+                    }
+
+                    if (prodOfferPriceSpantag.Count() > 0)
+                    {
+                        product.offerPrice = prodOfferPriceSpantag.First().InnerText.Replace("&#x20B9;", "").Replace("&nbsp;", "").Trim();
+                    }
+
+                    productList.Add(product);
+                }
+
+
+                //HtmlDocument
+
+                //id="widgetContent"
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return productList;
+        }
+
     }
-   
    
 }
